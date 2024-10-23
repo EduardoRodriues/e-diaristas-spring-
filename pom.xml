@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.treinaweb</groupId>
@@ -27,6 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
+	    <mapstruct.version>1.5.5.Final</mapstruct.version>
 		<java.version>22</java.version>
 		<spring-boot.version>3.3.3</spring-boot.version>
 	</properties>
@@ -59,7 +60,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-			<version>1.18.28</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,7 +69,6 @@
 		<dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator-core</artifactId>
-            <version>0.48</version>
        </dependency>
 		<dependency>
             <groupId>org.webjars</groupId>
@@ -85,6 +84,24 @@
             <artifactId>jquery-mask-plugin</artifactId>
             <version>1.14.16</version>
        </dependency>
+	   <dependency>
+		<groupId>org.mapstruct</groupId>
+		<artifactId>mapstruct</artifactId>
+		<version>${mapstruct.version}</version>
+		<scope>provided</scope>
+	   </dependency>
+	   <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+		</dependency> 
 	</dependencies>
 
 	<build>
@@ -99,6 +116,27 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+				<source>${java.version}</source>
+				<target>${java.version}</target>
+				<annotationProcessorPaths>
+				<path>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+		        <version>${lombok.version}</version>
+				</path>
+				<path>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct-processor</artifactId>
+		        <version>${mapstruct.version}</version>
+				</path>
+				</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 		</plugins>
